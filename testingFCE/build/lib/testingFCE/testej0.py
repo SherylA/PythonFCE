@@ -109,15 +109,15 @@ class Exercise:
     def _check_intercept_ej0(self, func):
         try:
             _, b = func(self.dataY,self.dataX)
-            if abs(b - self.intercept)>0.001:
+            if abs(b - self.intercept)>0.1:
                 self.failed = True
         except Exception as err:
             self.failed = True
 
     def check_exercise(self, func):
         nameTest = ["Haz ingresado una función",
-                     f"La pendiente es correcta, m = {self.slope}",
-                     f"El intercepto con el eje y es correcto, b = {self.intercept}"
+                     f"La pendiente es correcta, m = {self.slope} +/- 0.001",
+                     f"El intercepto con el eje y es correcto, b = {self.intercept} +/- 0.1"
                     ]
         test = [self._check_function, self._check_slope_ej0, self._check_intercept_ej0]
         testResult = ['Skipped']*len(test)
