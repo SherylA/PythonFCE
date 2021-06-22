@@ -1,0 +1,8 @@
+setup.py
+testingFCE/__init__.py
+testingFCE/testej0.py
+testingFCE.egg-info/PKG-INFO
+testingFCE.egg-info/SOURCES.txt
+testingFCE.egg-info/dependency_links.txt
+testingFCE.egg-info/requires.txt
+testingFCE.egg-info/top_level.txt

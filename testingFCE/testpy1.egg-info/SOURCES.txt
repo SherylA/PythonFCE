@@ -1,8 +1,0 @@
-setup.py
-testpy1/__init__.py
-testpy1/testing.py
-testpy1.egg-info/PKG-INFO
-testpy1.egg-info/SOURCES.txt
-testpy1.egg-info/dependency_links.txt
-testpy1.egg-info/requires.txt
-testpy1.egg-info/top_level.txt
