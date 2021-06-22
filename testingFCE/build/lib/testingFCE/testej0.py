@@ -60,7 +60,7 @@ class Exercise:
             line = f"""
             <tr>
             <td>{test}</td>
-            <td>{result} style="background-color:{color};"</td>
+            <td style="background-color:{color};">{result} </td>
             </tr>"""
 
             return line
@@ -104,7 +104,6 @@ class Exercise:
             if abs(m - self.slope) > 0.001:
                 self.failed = True
         except Exception as err:
-            print(err)
             self.failed = True
 
     def _check_intercept_ej0(self, func):
@@ -113,7 +112,6 @@ class Exercise:
             if abs(b - self.intercept)>0.001:
                 self.failed = True
         except Exception as err:
-            print(err)
             self.failed = True
 
     def check_exercise(self, func):
@@ -132,7 +130,6 @@ class Exercise:
         self.success = all([t=='Success' for t in testResult])
         middle_HTML = ""
         for i in range(len(test)):
-            print(nameTest[i],testResult[i])
             middle_HTML += self._lineHTML(nameTest[i],testResult[i]) + '\n'
 
         display(HTML(INIT_HTML + middle_HTML + END_HTML))
