@@ -69,8 +69,8 @@ class Exercise:
         self.failed = False
         self.success = False
         try:
-            self.slope = m[self.Group]
-            self.intercept = b[self.Group]
+            self.slope = m[self.Group-1]
+            self.intercept = b[self.Group-1]
         except Exception as err:
             print(err)
 
