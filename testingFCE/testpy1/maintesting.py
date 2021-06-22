@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-def chargeData_ej0():
+def chargeData_ej0(Grupo):
     try:
         root = '' 
         path = root + f'grupo_{Grupo}.txt'

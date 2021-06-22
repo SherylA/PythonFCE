@@ -9,8 +9,7 @@ setup(
     author_email='sheryl.avendano@udea.edu.co',
     license='BSD 2-clause',
     packages=['testpy1'],
-    install_requires=['mpi4py>=2.0',
-                      'numpy',                     
+    install_requires=['numpy', 'pandas'           
                       ],
 
     classifiers=[
