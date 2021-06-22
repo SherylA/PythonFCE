@@ -48,75 +48,8 @@ class Exercise:
         self.Group = Group
         self.Id = Id
         self.number = number
-
-    def _checkEx0(self):
-        self.failed = False
-        self.success = False
-        try:
-            self.slope = m[self.Group]
-            self.intercept = b[self.Group]
-        except Exception as err:
-            print(err)
-
-    def checkForNumber(self):
-        if self.number == 0: 
-            self._checkEx0()    
-        elif self.number == 1:
-            pass
     
-    def _chargeData_ej0(self):
-        try:
-            path = self.root + f'grupo_{self.Grupo}.txt'
-            data = pd.read_csv(path, sep=' ',header=None)
-            data.columns = ['Y','X']
-            self.dataY = data['Y'].values
-            self.dataX = data['X'].values
-            return data['Y'].values,data['X'].values
-        except Exception as err:
-            print(f"Estudiante {id} ha sucedido un error en la lectura de los datos:")
-            print(err)
-
-    def _check_function(self, func):
-        if not isfunction(func):
-            self.failed = True
-    
-    def _check_slope_ej0(self, func):
-        try:
-            m, _ = func(self.dataY,self.dataX)
-            if abs(m - self.slope) > 0.001:
-                self.failed = True
-        except Exception as err:
-            print(err)
-
-    def _check_intercept_ej0(self, func):
-        try:
-            _, b = func(self.dataY,self.dataX)
-            if abs(b - self.intercept)>0.001:
-                self.failed = True
-        except Exception as err:
-            print(err)
-
-    def check_exercise(self, func):
-        nameTest = ["Haz ingresado una función",
-                     f"La pendiente es correcta, m = {self.slope}",
-                     f"El intercepto con el eje y es correcto, b = {self.intercept}"
-                    ]
-        test = [self._check_function, self._check_slope_ej0, self._check_intercept_ej0]
-        testResult = 'skkiped'*len(test)
-        for i,t in enumerate(test):
-            t(func)
-            if self.failed:
-                testResult[i] = 'Failed' 
-                break
-            testResult[i] = 'Success' 
-        self.success = all([t=='Success' for t in testResult])
-        middle_HTML = ""
-        for i in range(len(test)):
-            middle_HTML += self._lineHTML(nameTest[i],testResult[i]) + '\n'
-
-        display(HTML(INIT_HTML + middle_HTML + END_HTML))
-
-        def _lineHTML(test,result):
+    def _lineHTML(self,test,result):
             if result == 'Failed':
                 color = '#ff6666'
             elif result == 'Success':
@@ -131,6 +64,80 @@ class Exercise:
             </tr>"""
 
             return line
+
+    def _checkEx0(self):
+        self.failed = False
+        self.success = False
+        try:
+            self.slope = m[self.Group]
+            self.intercept = b[self.Group]
+        except Exception as err:
+            print(err)
+
+    def _checkForNumber(self):
+        if self.number == 0: 
+            self._checkEx0()    
+        elif self.number == 1:
+            pass
+    
+    def chargeData_ej0(self):
+        try:
+            self._checkForNumber()
+            path = self.root + f'grupo_{self.Group}.txt'
+            print(f"Cargando archivo ubicado en {path}")
+            data = pd.read_csv(path, sep=' ',header=None)
+            data.columns = ['Y','X']
+            self.dataY = data['Y'].values
+            self.dataX = data['X'].values
+            return data['Y'].values,data['X'].values
+        except Exception as err:
+            print(f"Estudiante {self.Id} ha sucedido un error en la lectura de los datos:")
+            print(err)
+
+    def _check_function(self, func):
+        if not isfunction(func):
+            self.failed = True
+    
+    def _check_slope_ej0(self, func):
+        try:
+            m, _ = func(self.dataY,self.dataX)
+            if abs(m - self.slope) > 0.001:
+                self.failed = True
+        except Exception as err:
+            print(err)
+            self.failed = True
+
+    def _check_intercept_ej0(self, func):
+        try:
+            _, b = func(self.dataY,self.dataX)
+            if abs(b - self.intercept)>0.001:
+                self.failed = True
+        except Exception as err:
+            print(err)
+            self.failed = True
+
+    def check_exercise(self, func):
+        nameTest = ["Haz ingresado una función",
+                     f"La pendiente es correcta, m = {self.slope}",
+                     f"El intercepto con el eje y es correcto, b = {self.intercept}"
+                    ]
+        test = [self._check_function, self._check_slope_ej0, self._check_intercept_ej0]
+        testResult = ['Skipped']*len(test)
+        for i,t in enumerate(test):
+            t(func)
+            if self.failed:
+                testResult[i] = 'Failed' 
+                break
+            testResult[i] = 'Success' 
+        self.success = all([t=='Success' for t in testResult])
+        middle_HTML = ""
+        for i in range(len(test)):
+            print(nameTest[i],testResult[i])
+            middle_HTML += self._lineHTML(nameTest[i],testResult[i]) + '\n'
+
+        display(HTML(INIT_HTML + middle_HTML + END_HTML))
+
+        
         
 
 
